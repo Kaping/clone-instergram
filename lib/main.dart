@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './style.dart' as style;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(
@@ -18,24 +20,31 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class home extends StatelessWidget {
-  const home({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-  return Column(
-      children: [
-        Image(image: AssetImage("images/example.png")),
-        Text("난데요"),
-        Text("좋아요가 많아요")
-      ],
-    );
-  }
-}
 class _MyAppState extends State<MyApp> {
-
   var tab = 0;
+  var data = [];
 
 
+  getData() async {
+    var result = await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
+    if (result.statusCode == 200){
+      var result2 = jsonDecode(result.body);
+
+      setState(() {
+        data = result2;
+      });
+
+    } else {
+      throw Exception('failed get');
+    }
+
+  }
+
+  @override
+  void initState()  {
+    super.initState();
+    getData();
+  }
 
   @override
 
@@ -49,11 +58,8 @@ class _MyAppState extends State<MyApp> {
               icon: Icon(Icons.add_box_outlined),)
         ],
       ),
-      body: Column(
-        children: [
-          Image.asset('assets/example.png'),
-        ],
-      ),
+      body: [Home(data: data), Text("샵페이지")][tab],
+
       // ,[Text("집"), Text("마트")][tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
@@ -71,6 +77,38 @@ class _MyAppState extends State<MyApp> {
     );
 
   }
+
 }
+
+class Home extends StatelessWidget {
+  const Home({Key? key, this.data}) : super(key: key);
+  final data;
+  @override
+
+  Widget build(BuildContext context) {
+
+    if (data.isNotEmpty) {
+      return ListView.builder(itemCount: 3, itemBuilder: (c, i){
+        return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+
+              Image.network(data[i]['image'].toString()),
+              // Image(image: AssetImage("example.png")),
+              Text('likes ' + data[i]['likes'].toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+              Text(data[i]['user'].toString()),
+              Text(data[i]['content'].toString())
+            ]
+        );
+      });
+    } else{
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+  }
+}
+
 
 

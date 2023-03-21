@@ -22,7 +22,7 @@ var theme = ThemeData(
 
 
     textTheme: TextTheme(
-      bodyText2: TextStyle(color: Colors.red)
+      bodyText2: TextStyle(color: Colors.black)
     ),
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
