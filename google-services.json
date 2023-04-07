@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235241887890",
+    "project_id": "instar-clone-coding",
+    "storage_bucket": "instar-clone-coding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235241887890:android:dc04f44ee393207421ee4b",
+        "android_client_info": {
+          "package_name": "com.inu.instargram_clone_coding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235241887890-ran0s07rjke5d8kff786tthklvt37jtg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5VfOAj8pz88vQWJqwdYU2qcXp7k8cInQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235241887890-ran0s07rjke5d8kff786tthklvt37jtg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
